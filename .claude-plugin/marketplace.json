@@ -1,0 +1,26 @@
+{
+  "name": "aave",
+  "owner": {
+    "name": "Aave Labs",
+    "url": "https://github.com/aave"
+  },
+  "metadata": {
+    "description": "Aave plugins and skills for coding agents."
+  },
+  "plugins": [
+    {
+      "name": "mcp",
+      "source": "./plugins/mcp",
+      "description": "Connects the agent to Aave's official MCP server: live V3 and V4 markets, wallet positions and health factor, DAO governance, and unsigned non-custodial transactions.",
+      "author": {
+        "name": "Aave Labs",
+        "url": "https://github.com/aave"
+      },
+      "homepage": "https://mcp.aave.com",
+      "repository": "https://github.com/aave/mcp",
+      "license": "MIT",
+      "keywords": ["aave", "defi", "lending", "mcp", "governance"],
+      "category": "defi"
+    }
+  ]
+}
