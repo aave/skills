@@ -39,4 +39,4 @@ PRs welcome. Run `claude plugin validate .` first.
 
 ## License
 
-[MIT](LICENSE)
+Business Source License, see [LICENSE](LICENSE). As a customized license, BUSL uses the `LicenseRef-` prefix per [SPDX Spec v2.3, Annex E](https://spdx.github.io/spdx-spec/v2.3/using-SPDX-short-identifiers-in-source-files/).
