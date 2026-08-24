@@ -17,8 +17,8 @@
         "url": "https://github.com/aave"
       },
       "homepage": "https://mcp.aave.com",
-      "repository": "https://github.com/aave/mcp",
-      "license": "LicenseRef-BUSL",
+      "repository": "https://github.com/aave/skills",
+      "license": "MIT",
       "keywords": ["aave", "defi", "lending", "mcp", "governance"],
       "category": "defi"
     }
