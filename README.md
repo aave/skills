@@ -13,7 +13,7 @@ positions and health factor, DAO governance, and unsigned transactions your own 
 ```
 
 Then ask "what's the health factor of `0x…`", "USDC supply APY, V3 or V4?", or "prepare a supply of
-500 USDC for `0x…`". Tool list and per-client setup: [aave/mcp](https://github.com/aave/mcp).
+500 USDC for `0x…`". Tool list and per-client setup: [aave.com/docs/mcp](https://aave.com/docs/mcp).
 
 Any MCP client can skip the plugin and point at the URL. `plugins/mcp/.mcp.json` is the config.
 
@@ -39,4 +39,5 @@ PRs welcome. Run `claude plugin validate .` first.
 
 ## License
 
-Business Source License, see [LICENSE](LICENSE). As a customized license, BUSL uses the `LicenseRef-` prefix per [SPDX Spec v2.3, Annex E](https://spdx.github.io/spdx-spec/v2.3/using-SPDX-short-identifiers-in-source-files/).
+MIT, see [LICENSE](LICENSE). This repo is the plugin manifest only; it points at
+[mcp.aave.com](https://mcp.aave.com), whose server implementation is licensed separately.
