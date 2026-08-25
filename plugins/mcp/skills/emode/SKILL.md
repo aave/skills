@@ -11,7 +11,7 @@ v3 only — v4 replaced eMode with risk premiums and dynamic configuration, so o
 
 1. `get_emode_categories`, narrowed with `symbols`, for the categories an asset belongs to: each carries the `categoryId` that `prepare_set_emode` takes, its own max LTV, liquidation threshold and penalty, and the member symbols. Markets with no matching category are omitted, not empty.
 2. Before any switch, read what the wallet holds (`get_user_positions`): a position in eMode may only hold that category's assets.
-3. `prepare_set_emode` with the categoryId (0 turns eMode off) and the market from `get_markets` in this session. Unsigned; the user signs.
+3. `prepare_set_emode` with the categoryId (0 turns eMode off) and the market selector read from `get_markets` in this session. Unsigned; the user signs.
 
 ## Reporting rules
 

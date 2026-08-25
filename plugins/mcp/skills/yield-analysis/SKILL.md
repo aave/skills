@@ -15,6 +15,13 @@ description: Compare Aave yields and rates — best APY for an asset, rates acro
 
 - State the coverage with the numbers: which chains were read (`chainsCovered`), which were not (`chainsNotCovered`), and that `chainsNotServed` chains hold no data here at all.
 - Say whether the answer is a sample or the population. "Top 5 by APY" filtered from one call is a sample; only an unfiltered read of every covered chain supports "the best rate on Aave is…".
-- Rank only rates that can be entered: skip rows flagged `isFrozen` / `isPaused` / cap-reached, and check `suppliable` / `borrowable` (v4) or `availableLiquidity` (v3) against the size in question. A great APY with no capacity is not an option.
+- Rank only **enterable** rates: skip rows flagged `isFrozen` / `isPaused` / cap-reached, and check `suppliable` / `borrowable` (v4) or `availableLiquidity` (v3) against the size in question. A great APY with no capacity is not an option.
 - Spot APY is variable: for any recommendation, quote the recent range from `get_apy_history` next to the spot figure.
 - v4 spokes sharing a hub share its rate — identical APYs across spoke rows are one underlying rate, not independent options.
+
+## Done when
+
+- Every chain read is named, and every chain not read is named as not-read.
+- The answer says whether it is a sample or the population; "the best rate on Aave" appears only behind an unfiltered read of every covered chain.
+- Every ranked row is enterable, with its capacity checked against the size asked for.
+- Every spot APY quoted for a recommendation carries its recent range beside it.

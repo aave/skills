@@ -10,7 +10,7 @@ These tools exist on v4 only, and they are atomic: funds never leave Aave and th
 ## Steps
 
 1. `get_user_positions` for the wallet, take the `spokeId`, then `get_position_items` (side `supply` for collateral swaps, `borrow` for debt swaps or the debt being repaid). The `positionItemId` is what a swap sells.
-2. Quote it: `get_position_swap_quote` (kind `supply` = collateral swap, `borrow` = debt swap) with `buyReserve` from `get_markets` in this session — or `get_repay_with_supply_quote` to pay debt down from collateral. Prefer that atomic quote over a hand-rolled withdraw → swap → repay, which dips the health factor between steps.
+2. Quote it: `get_position_swap_quote` (kind `supply` = collateral swap, `borrow` = debt swap) with the `buyReserve` selector read from `get_markets` in this session — or `get_repay_with_supply_quote` to pay debt down from collateral. Prefer that atomic quote over a hand-rolled withdraw → swap → repay, which dips the health factor between steps.
 3. `prepare_position_swap` with the quoteId. It can ask for up to two prior signatures (an adapter approval and a position-manager approval): have the user sign exactly what the quote asks, pass the signatures back, and hand over the final typed data unsigned.
 4. Present the quote — both sides' amounts, slippage, the resulting position — before anything is signed.
 

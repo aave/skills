@@ -1,6 +1,6 @@
 ---
 name: token-swaps
-description: Token swaps through Aave — read this before any get_swap_quote or prepare_swap call: chain coverage, sell vs buy kinds, intent vs transaction routes, relaying and tracking orders — for "swap X for Y", "quote a swap", converting a token, or a swap's status.
+description: Token swaps through Aave — read this before any get_swap_quote or prepare_swap call: chain coverage, sell vs buy kinds, intent vs transaction routes, relaying and tracking orders — for "swap X for Y", converting a token, or a swap's status.
 ---
 
 # Aave token swaps
@@ -17,4 +17,4 @@ Swaps are protocol-agnostic but run on the v4 backend: only the chains that back
 ## Rules
 
 - A submitted intent is an open order, not a completed swap: report completion from `get_swap_status`, never from submission success. `cancel_swap` needs the user's cancellation signature.
-- Approval permits appear only when a quote offers one (`bySignature`): never pass `permitSignature` on a first call.
+- Approval permits appear only when a quote offers one (`bySignature`): pass `permitSignature` only when re-issuing a call after that quote handed you one to sign.

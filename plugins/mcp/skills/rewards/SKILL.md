@@ -1,6 +1,6 @@
 ---
 name: rewards
-description: Aave rewards — read this before any rewards question or get_user_rewards call: claimables across protocol and Merit programmes, and the claim path difference between v3 and v4 — for "unclaimed rewards", "claim my rewards", "incentives", "Merit".
+description: Aave rewards — read this before any rewards question or get_user_rewards call: claimables across protocol and Merit programmes, and the claim path difference between v3 and v4 — for "unclaimed rewards", "claim my rewards", "Merit".
 ---
 
 # Aave rewards
@@ -13,5 +13,5 @@ description: Aave rewards — read this before any rewards question or get_user_
 
 ## Reporting rules
 
-- Report rewards per chain using each row's own `chainId`; a chain under `chainsNotServed` is "no data here", not "no rewards".
+- State the coverage, and report rewards per chain using each row's own `chainId`. A chain under `chainsNotServed` is "no data here", which is a different answer from "no rewards".
 - An empty result for a wallet with positions is a real answer: say "nothing claimable right now", not "no rewards programme exists".
