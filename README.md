@@ -30,20 +30,18 @@ To install it for a whole repo, commit to `.claude/settings.json`:
 
 ### Skills
 
-The plugin ships twelve skills the agent reaches on its own:
+The plugin ships eight skills the agent reaches on its own. Each was kept only after an A/B run showed it
+changed the agent's tool sequence for the better against the bare server; skills that only restated what
+the server already does were dropped.
 
-- `position-health` — wallet review: health factor, liquidation distance, per-market reporting.
-- `safe-transactions` — supply / borrow / withdraw / repay with the discover → simulate → build discipline.
-- `yield-analysis` — cross-chain, cross-version rate comparison that states what it covered.
+- `safe-transactions` — supply / borrow / withdraw / repay with the discover → inspect → simulate → build discipline.
+- `yield-analysis` — cross-chain, cross-version rate comparison that states what it covered and quotes the range beside the spot.
 - `governance` — proposals, payload execution per chain, vote tallies and wallet votes.
-- `token-swaps` — quote → sign → relay → track, on the chains the swap backend serves.
-- `position-swaps` — v4 atomic collateral swaps, debt swaps, and repay-from-collateral.
-- `emode` — v3 efficiency mode: categories, the LTV trade-off, switching safely.
-- `rewards` — claimable incentives across protocol and Merit, and the claim path per version.
-- `gho-savings` — sGHO deposits and share-denominated withdrawals, stkGHO migration.
-- `account-activity` — event history and position trajectory, with honest v3 scope.
 - `market-structure` — chains, hubs and spokes: where liquidity sits vs where users act.
-- `liquidations` — eligibility (health factor < 1), selectors, and the unsigned call.
+- `account-activity` — event history and position trajectory, with honest v3 scope.
+- `deleverage` — lift a health factor: repay, repay from collateral, add collateral — compared on the simulated result.
+- `collateral-toggle` — enable or disable collateral, refused when the health factor after would break.
+- `tx-confirmation` — what a signed transaction did, read from the position it left, not from the hash.
 
 ## Other agents
 
