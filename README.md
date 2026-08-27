@@ -76,7 +76,8 @@ versioning, beginning with `1.0.0`.
 
 ## Contributing
 
-PRs welcome. Run `claude plugin validate .` first.
+Skill proposals and corrections are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) covers what a
+proposal needs and the checks to run first.
 
 ## License
 
