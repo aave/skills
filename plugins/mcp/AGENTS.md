@@ -5,8 +5,8 @@ How to work against [mcp.aave.com](https://mcp.aave.com), Aave's official MCP se
 ## Workflow: discover → inspect → simulate → build
 
 1. **Discover** — `get_markets`, narrowed with `symbols`, omitting `chainId` so one call covers every chain. Selectors (v4 `reserveId`; v3 `market` + `token` + `chainId`) come from this call in this session: they are deployment-specific and cannot be recalled or constructed.
-2. **Inspect** — `get_user_summary` and `get_user_positions` for the wallet, `get_reserve_details` for the reserve.
-3. **Simulate** — `preview_action` before building; mandatory before any borrow or withdraw. An error-level warning means the action cannot succeed — fix it rather than build it.
+2. **Inspect** — `get_user_summary` and `get_user_positions` for the wallet, `get_reserve_details` for the reserve. Do this before a supply as well as before a borrow or withdraw: a transaction sized without the position is a guess.
+3. **Simulate** — `preview_action` before building; mandatory before any borrow or withdraw, and run it for supply and repay too. An error-level warning means the action cannot succeed — fix it rather than build it. When comparing ways to lift a health factor (repay, repay from collateral, add collateral), simulate every route and report its `healthFactorAfter`; never estimate one.
 4. **Build** — `prepare_action` (or another `prepare_*`). Everything returned is unsigned; the user's own wallet signs and submits. Follow the plan in order — an approval step may precede the action — and confirm a sent transaction with `get_transaction_processed` before building one that depends on it.
 
 ## Rules that prevent real mistakes
@@ -17,4 +17,5 @@ How to work against [mcp.aave.com](https://mcp.aave.com), Aave's official MCP se
 - Coverage: responses name the chains they read (`chainsCovered`). A chain under `chainsNotServed` holds no data on this API — an empty result there is not "zero".
 - Health factor < 1.0 = liquidatable now. Health factors are per market (v3) / per position (v4) — never average them.
 - A supply is not collateral unless enabled (`enableCollateral: true`); without collateral, borrowing power is zero and any borrow fails.
+- History on v3 is one market on one chain per `get_user_activity` call: read `get_user_positions` first, sweep only the markets the wallet holds, and say whether the feed was read to its end.
 - When ranking yields: skip frozen/paused/cap-reached reserves, check available capacity against the intended size, and say whether the answer is a sample or the population.
