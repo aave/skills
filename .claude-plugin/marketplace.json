@@ -5,12 +5,17 @@
     "url": "https://github.com/aave"
   },
   "metadata": {
-    "description": "Aave plugins and skills for coding agents."
+    "description": "Aave plugins and skills for coding agents.",
+    "version": "1.0.0"
+  },
+  "renames": {
+    "mcp": "aave-mcp"
   },
   "plugins": [
     {
-      "name": "mcp",
+      "name": "aave-mcp",
       "source": "./plugins/mcp",
+      "version": "1.0.0",
       "description": "Connects the agent to Aave's official MCP server: live V3 and V4 markets, wallet positions and health factor, DAO governance, and unsigned non-custodial transactions.",
       "author": {
         "name": "Aave Labs",
