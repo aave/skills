@@ -1,0 +1,30 @@
+.claude-plugin/marketplace.json
+  h_df11fdcb6af10a 8-12,16,18
+.cursor-plugin/marketplace.json
+  h_df11fdcb6af10a 1-18
+PUBLISHING_TODO.md
+  h_df11fdcb6af10a 1-94
+README.md
+  h_df11fdcb6af10a 5,12,16,20-26,33,39-47
+plugins/mcp/.claude-plugin/plugin.json
+  h_df11fdcb6af10a 2-3,9
+plugins/mcp/.cursor-plugin/plugin.json
+  h_df11fdcb6af10a 1-15
+plugins/mcp/CHANGELOG.md
+  h_df11fdcb6af10a 1-6
+plugins/mcp/README.md
+  h_df11fdcb6af10a 1-33
+plugins/mcp/mcp.json
+  h_df11fdcb6af10a 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "fe75e6f0d0deca61cddbb8b32c126f1e3f3c8eb0",
+  "prompts": {},
+  "humans": {
+    "h_df11fdcb6af10a": {
+      "author": "Sam Skynner <skynnes@gmail.com>"
+    }
+  }
+}
