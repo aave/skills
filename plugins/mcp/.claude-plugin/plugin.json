@@ -1,11 +1,12 @@
 {
-  "name": "mcp",
+  "name": "aave-mcp",
+  "version": "1.0.0",
   "description": "Connects the agent to Aave's official MCP server: live V3 and V4 markets, wallet positions and health factor, DAO governance, and unsigned non-custodial transactions.",
   "author": {
     "name": "Aave Labs",
     "url": "https://github.com/aave"
   },
-  "homepage": "https://mcp.aave.com",
+  "homepage": "https://github.com/aave/skills",
   "repository": "https://github.com/aave/skills",
   "license": "MIT",
   "keywords": ["aave", "defi", "lending", "mcp", "governance"],

@@ -1,0 +1,18 @@
+{
+  "name": "aave",
+  "owner": {
+    "name": "Aave Labs"
+  },
+  "metadata": {
+    "description": "Aave plugins and skills for coding agents.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "aave-mcp",
+      "source": "./plugins/mcp",
+      "version": "1.0.0",
+      "description": "Connects Cursor to Aave's official MCP server for live protocol data, wallet positions, governance, and non-custodial transaction preparation."
+    }
+  ]
+}

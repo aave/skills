@@ -1,0 +1,15 @@
+{
+  "name": "aave-mcp",
+  "displayName": "Aave MCP",
+  "version": "1.0.0",
+  "description": "Connects Cursor to Aave's official MCP server for live V3 and V4 markets, wallet positions, governance, and non-custodial transaction preparation.",
+  "author": {
+    "name": "Aave Labs"
+  },
+  "homepage": "https://github.com/aave/skills",
+  "repository": "https://github.com/aave/skills",
+  "license": "MIT",
+  "keywords": ["aave", "defi", "lending", "mcp", "governance"],
+  "logo": "assets/aave-logo.png",
+  "mcpServers": "./mcp.json"
+}
