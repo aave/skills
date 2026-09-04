@@ -1,0 +1,51 @@
+# skills.sh serves a snapshot taken when its telemetry service last saw the repo, not a live
+# read of GitHub — repos deleted from GitHub still render there. A push does not refresh it.
+# The only documented trigger is an install through the CLI, so that is what this runs.
+#
+# It is paths-filtered to the files that appear on the page, because the same call increments
+# the public install counter. GitHub Actions sets CI, which the CLI stamps on the event.
+name: refresh skills.sh
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'plugins/mcp/skills/**'
+      - 'skills.sh.json'
+      - '.claude-plugin/**'
+      - 'plugins/mcp/.claude-plugin/**'
+      - 'plugins/mcp/.cursor-plugin/**'
+  workflow_dispatch:
+
+concurrency:
+  group: refresh-skills-sh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install from the published repo so skills.sh re-reads it
+        run: npx --yes skills add aave/skills --skill '*' -a claude-code -y --copy
+        working-directory: ${{ runner.temp }}
+
+      # Confirms the snapshot actually moved. Reports without failing the run: the index is a
+      # third-party service and its lag is not a reason to redden main.
+      - name: Check the page picked it up
+        continue-on-error: true
+        run: |
+          probe=$(grep -ho 'mcp\.aave\.com' plugins/mcp/skills/yield-analysis/SKILL.md | head -1)
+          for i in $(seq 1 10); do
+            if curl -sf "https://www.skills.sh/aave/skills/yield-analysis" | grep -qF "$probe"; then
+              echo "skills.sh is serving the current SKILL.md"
+              exit 0
+            fi
+            echo "attempt $i: not refreshed yet, waiting 30s"
+            sleep 30
+          done
+          echo "::warning::skills.sh still serving an older snapshot after 5 minutes"

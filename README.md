@@ -90,15 +90,16 @@ versioning, beginning with `1.0.0`.
 
 [skills.sh](https://www.skills.sh/aave/skills) is different: it serves a snapshot taken when the
 telemetry service last saw the repo, not the current file, and a push does not refresh it. Repos
-deleted from GitHub still render there. After a change worth showing on that page, install once from
-the CLI to trigger a re-read:
+deleted from GitHub still render there. The only documented way to trigger a re-read is an install
+through the CLI:
 
 ```
 npx skills add aave/skills --skill '*' -a claude-code -y
 ```
 
-This is deliberately not in CI. It is the same call that increments the install counter, so it runs
-when the content actually changed, not on every push.
+`.github/workflows/refresh-listing.yml` runs that on every push to `main` that touches a file the
+page shows, and checks afterwards that the snapshot moved. Because the same call increments the
+public install counter, the workflow is paths-filtered rather than running on all of them.
 
 ## Support, privacy, and terms
 
