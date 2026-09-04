@@ -1,5 +1,7 @@
 # Aave skills
 
+[![skills.sh](https://skills.sh/b/aave/skills)](https://skills.sh/aave/skills)
+
 Aave plugins for coding agents.
 
 ## Aave MCP
@@ -45,6 +47,25 @@ The plugin ships five skills the agent reaches on its own when a request matches
 - `tx-confirmation` — what a signed transaction did, confirmed from the position it left behind rather than from the hash.
 
 ## Other agents
+
+### `npx skills add`
+
+The five skills install into Claude Code, Codex, Cursor, Copilot and around seventy other agents
+with one command:
+
+```
+npx skills add aave/skills
+```
+
+That command installs the skills only. It does not read `plugins/mcp/.mcp.json`, so add the server
+too or the skills will name tools the agent does not have:
+
+```
+claude mcp add --transport http aave https://mcp.aave.com
+codex mcp add aave --url https://mcp.aave.com
+```
+
+### MCP config
 
 Codex and any other MCP client can use the same server without the plugin. Point the client at it —
 Codex CLI:

@@ -5,6 +5,10 @@ description: Reduce the risk on an Aave position — "reduce my risk", "unwind",
 
 # Aave deleveraging
 
+Every tool named below comes from Aave's MCP server, `https://mcp.aave.com`. If `get_markets` is not
+available, add it first: `claude mcp add --transport http aave https://mcp.aave.com` (Claude Code),
+`codex mcp add aave --url https://mcp.aave.com` (Codex), or point any other MCP client at the URL.
+
 There are three ways to lift a health factor, and they cost the user different things. Compare them before recommending one.
 
 ## Steps
