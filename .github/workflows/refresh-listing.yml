@@ -30,9 +30,22 @@ jobs:
         with:
           node-version: 22
 
+      # The refresh is the install event itself. If telemetry is off the job would pass
+      # while doing nothing, so it stops here instead.
+      - name: Telemetry has to be on for this to do anything
+        run: |
+          if [ -n "${DISABLE_TELEMETRY:-}" ] || [ -n "${DO_NOT_TRACK:-}" ]; then
+            echo "DISABLE_TELEMETRY or DO_NOT_TRACK is set; the CLI would send no install event"
+            exit 1
+          fi
+
       - name: Install from the published repo so skills.sh re-reads it
         run: npx --yes skills add aave/skills --skill '*' -a claude-code -y --copy
         working-directory: ${{ runner.temp }}
+        env:
+          # Optional for a public repo, but it lifts the CLI's GitHub calls off the
+          # runner's shared anonymous rate limit.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Confirms the snapshot actually moved. Reports without failing the run: the index is a
       # third-party service and its lag is not a reason to redden main.
