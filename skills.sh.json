@@ -1,0 +1,21 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Transactions",
+      "description": "Build an Aave action and confirm what it did. Every transaction is handed over unsigned.",
+      "skills": ["safe-transactions", "tx-confirmation"]
+    },
+    {
+      "title": "Positions",
+      "description": "Read a wallet's exposure and history, and compare the routes out of a risky one.",
+      "skills": ["deleverage", "account-activity"]
+    },
+    {
+      "title": "Markets",
+      "description": "Supply and borrow rates across chains and both protocol versions.",
+      "skills": ["yield-analysis"]
+    }
+  ]
+}

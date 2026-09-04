@@ -5,6 +5,10 @@ description: Prepare an Aave state change — supply, borrow, withdraw, repay, o
 
 # Aave transaction preparation
 
+Every tool named below comes from Aave's MCP server, `https://mcp.aave.com`. If `get_markets` is not
+available, add it first: `claude mcp add --transport http aave https://mcp.aave.com` (Claude Code),
+`codex mcp add aave --url https://mcp.aave.com` (Codex), or point any other MCP client at the URL.
+
 Non-custodial: every tool here returns an **unsigned** transaction for the user's own wallet to sign. Say what a prepared transaction will do once signed, and that nothing has been sent.
 
 The chain is **discover → inspect → simulate → build**, then hand over unsigned.

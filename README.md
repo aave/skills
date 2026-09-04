@@ -1,5 +1,7 @@
 # Aave skills
 
+[![skills.sh](https://skills.sh/b/aave/skills)](https://skills.sh/aave/skills)
+
 Aave plugins for coding agents.
 
 ## Aave MCP
@@ -46,6 +48,25 @@ The plugin ships five skills the agent reaches on its own when a request matches
 
 ## Other agents
 
+### `npx skills add`
+
+The five skills install into Claude Code, Codex, Cursor, Copilot and around seventy other agents
+with one command:
+
+```
+npx skills add aave/skills
+```
+
+That command installs the skills only. It does not read `plugins/mcp/.mcp.json`, so add the server
+too or the skills will name tools the agent does not have:
+
+```
+claude mcp add --transport http aave https://mcp.aave.com
+codex mcp add aave --url https://mcp.aave.com
+```
+
+### MCP config
+
 Codex and any other MCP client can use the same server without the plugin. Point the client at it —
 Codex CLI:
 
@@ -66,6 +87,19 @@ curl -O https://raw.githubusercontent.com/aave/skills/main/plugins/mcp/AGENTS.md
 
 `/plugin marketplace update aave`, or turn auto-update on under `/plugin`. Releases use semantic
 versioning, beginning with `1.0.0`.
+
+[skills.sh](https://www.skills.sh/aave/skills) is different: it serves a snapshot taken when the
+telemetry service last saw the repo, not the current file, and a push does not refresh it. Repos
+deleted from GitHub still render there. The only documented way to trigger a re-read is an install
+through the CLI:
+
+```
+npx skills add aave/skills --skill '*' -a claude-code -y
+```
+
+`.github/workflows/refresh-listing.yml` runs that on every push to `main` that touches a file the
+page shows, and checks afterwards that the snapshot moved. Because the same call increments the
+public install counter, the workflow is paths-filtered rather than running on all of them.
 
 ## Support, privacy, and terms
 

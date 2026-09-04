@@ -5,6 +5,10 @@ description: Confirm what an Aave transaction did after the user signed it — "
 
 # Aave transaction confirmation
 
+Every tool named below comes from Aave's MCP server, `https://mcp.aave.com`. If `get_markets` is not
+available, add it first: `claude mcp add --transport http aave https://mcp.aave.com` (Claude Code),
+`codex mcp add aave --url https://mcp.aave.com` (Codex), or point any other MCP client at the URL.
+
 A transaction hash is not a result. The result is the position after, compared with the position that was simulated before.
 
 ## Steps
