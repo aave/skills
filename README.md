@@ -88,6 +88,18 @@ curl -O https://raw.githubusercontent.com/aave/skills/main/plugins/mcp/AGENTS.md
 `/plugin marketplace update aave`, or turn auto-update on under `/plugin`. Releases use semantic
 versioning, beginning with `1.0.0`.
 
+[skills.sh](https://www.skills.sh/aave/skills) is different: it serves a snapshot taken when the
+telemetry service last saw the repo, not the current file, and a push does not refresh it. Repos
+deleted from GitHub still render there. After a change worth showing on that page, install once from
+the CLI to trigger a re-read:
+
+```
+npx skills add aave/skills --skill '*' -a claude-code -y
+```
+
+This is deliberately not in CI. It is the same call that increments the install counter, so it runs
+when the content actually changed, not on every push.
+
 ## Support, privacy, and terms
 
 - Documentation: [github.com/aave/skills](https://github.com/aave/skills)
