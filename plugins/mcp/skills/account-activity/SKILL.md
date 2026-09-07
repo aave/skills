@@ -5,6 +5,10 @@ description: An Aave account's history — past supplies, borrows, repays, withd
 
 # Aave account activity
 
+Every tool named below comes from Aave's MCP server, `https://mcp.aave.com`. If `get_markets` is not
+available, add it first: `claude mcp add --transport http aave https://mcp.aave.com` (Claude Code),
+`codex mcp add aave --url https://mcp.aave.com` (Codex), or point any other MCP client at the URL.
+
 ## Steps
 
 1. `get_user_activity` for the event feed, most recent first. v4 covers every chain in one read; v3 reads one market on one chain at a time and states that scope — so on v3, sweep the markets the wallet actually holds (from `get_user_positions`) rather than treating one market's page as the full history.

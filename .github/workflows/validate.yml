@@ -1,0 +1,34 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Manifests and skill frontmatter
+        run: node scripts/validate.mjs
+
+      # --list parses the repo the way an installer would and exits before any
+      # telemetry, so this checks discovery without recording an install.
+      - name: The skills CLI can discover all five
+        run: |
+          out=$(npx --yes skills add . --list 2>&1)
+          echo "$out"
+          for s in safe-transactions deleverage yield-analysis account-activity tx-confirmation; do
+            echo "$out" | grep -q "$s" || { echo "skills CLI did not list $s"; exit 1; }
+          done
+
+      - name: Claude plugin manifest
+        run: |
+          npm i -g @anthropic-ai/claude-code
+          claude plugin validate .

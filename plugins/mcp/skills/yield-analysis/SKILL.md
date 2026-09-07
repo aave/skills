@@ -5,6 +5,10 @@ description: Compare Aave yields and rates — best APY for an asset, rates acro
 
 # Aave yield and market analysis
 
+Every tool named below comes from Aave's MCP server, `https://mcp.aave.com`. If `get_markets` is not
+available, add it first: `claude mcp add --transport http aave https://mcp.aave.com` (Claude Code),
+`codex mcp add aave --url https://mcp.aave.com` (Codex), or point any other MCP client at the URL.
+
 ## Steps
 
 1. `get_markets` with `symbols` for the assets in question, no `chainId`, version `all`. The symbol filter is what makes v3 cross-chain — unfiltered v3 reads Ethereum alone.
