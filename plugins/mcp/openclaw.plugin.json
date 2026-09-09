@@ -1,0 +1,8 @@
+{
+  "id": "aave-mcp",
+  "name": "Aave",
+  "description": "Connects the agent to Aave's official MCP server: live V3 and V4 markets, wallet positions and health factor, DAO governance, and unsigned non-custodial transactions.",
+  "version": "1.0.0",
+  "icon": "https://aave.com/images/icon-aave.png",
+  "categories": ["finance-payments"]
+}
