@@ -7,6 +7,8 @@
     "url": "https://github.com/aave"
   },
   "homepage": "https://github.com/aave/skills",
+  "icon": "./assets/aave-icon.png",
+  "privacyPolicyUrl": "https://aave.com/privacy-policy",
   "repository": "https://github.com/aave/skills",
   "license": "MIT",
   "keywords": ["aave", "defi", "lending", "mcp", "governance"],
