@@ -1,0 +1,19 @@
+plugins/mcp/.claude-plugin/plugin.json
+  s_ebc122f31dd2f1::t_e3d1448c9bf545 10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7efc0c5aa5d78e8b86782656f5d05df045e94850",
+  "prompts": {},
+  "sessions": {
+    "s_ebc122f31dd2f1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e776-43f0-7391-b963-b2f903184bfa",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Sam Skynner <skynnes@gmail.com>"
+    }
+  }
+}
