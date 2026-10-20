@@ -11,5 +11,5 @@
   "license": "MIT",
   "keywords": ["aave", "defi", "lending", "mcp", "governance"],
   "logo": "assets/aave-logo.png",
-  "mcpServers": "./mcp.json"
+  "mcpServers": "./.mcp.json"
 }
