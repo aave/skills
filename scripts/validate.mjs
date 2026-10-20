@@ -1,10 +1,11 @@
-// Repo-shape checks for every surface that installs these skills:
-// the Claude marketplace, the Cursor manifest, the skills CLI, and the skills.sh repo page.
+// Repo-shape checks for every surface that installs these skills: the Claude marketplace, the
+// Cursor manifest, the Agent Plugins package Hermes installs, the skills CLI, and the skills.sh page.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const SKILLS_DIR = 'plugins/mcp/skills';
 const MCP_URL = 'https://mcp.aave.com';
+const AGENT_PLUGINS_SCHEMAS = 'https://agent-plugins.org/schemas/1.0.0';
 const errors = [];
 const fail = (m) => errors.push(m);
 
@@ -22,6 +23,7 @@ for (const p of [
   '.cursor-plugin/marketplace.json',
   'plugins/mcp/.claude-plugin/plugin.json',
   'plugins/mcp/.cursor-plugin/plugin.json',
+  'plugins/mcp/plugin.json',
   'plugins/mcp/mcp.json',
   'plugins/mcp/.mcp.json',
   'skills.sh.json',
@@ -30,14 +32,30 @@ for (const p of [
   else json(p);
 }
 
-// The two MCP configs are read by different clients and must not drift apart.
-const a = json('plugins/mcp/mcp.json');
-const b = json('plugins/mcp/.mcp.json');
-if (a && b && JSON.stringify(a) !== JSON.stringify(b)) {
-  fail('plugins/mcp/mcp.json and plugins/mcp/.mcp.json disagree');
+// .mcp.json is the Claude and Cursor shape; mcp.json is the Agent Plugins shape, which names the
+// transport differently and carries a $schema. Both must reach the same server.
+const claudeMcp = json('plugins/mcp/.mcp.json');
+if (claudeMcp && claudeMcp.mcpServers?.aave?.url !== MCP_URL) {
+  fail(`plugins/mcp/.mcp.json does not point at ${MCP_URL}`);
 }
-if (a && a.mcpServers?.aave?.url !== MCP_URL) {
-  fail(`plugins/mcp/mcp.json does not point at ${MCP_URL}`);
+const portableMcp = json('plugins/mcp/mcp.json');
+if (portableMcp) {
+  if (portableMcp.$schema !== `${AGENT_PLUGINS_SCHEMAS}/mcp.schema.json`) {
+    fail('plugins/mcp/mcp.json: $schema is not Agent Plugins 1.0.0');
+  }
+  const aave = portableMcp.mcpServers?.aave;
+  if (aave?.type !== 'streamable-http' || aave?.url !== MCP_URL) {
+    fail(`plugins/mcp/mcp.json: aave must be streamable-http at ${MCP_URL}`);
+  }
+}
+const portable = json('plugins/mcp/plugin.json');
+if (portable && portable.$schema !== `${AGENT_PLUGINS_SCHEMAS}/plugin.schema.json`) {
+  fail('plugins/mcp/plugin.json: $schema is not Agent Plugins 1.0.0');
+}
+// The cursor-agent CLI has been reported to drop a config holding a streamable-http entry.
+const cursor = json('plugins/mcp/.cursor-plugin/plugin.json');
+if (cursor && cursor.mcpServers !== './.mcp.json') {
+  fail('plugins/mcp/.cursor-plugin/plugin.json: mcpServers must stay ./.mcp.json');
 }
 
 const names = new Set();

@@ -17,12 +17,19 @@ The server never receives private keys. Read and `prepare_*` tools return public
 unsigned transactions, or typed data for the user's own wallet to review and sign. Review all wallet
 requests before signing.
 
+Two tools send something on: `submit_signed_order` relays an order the user already signed, and
+`cancel_order` relays a signed cancellation. Neither can change what the signature covers. They are
+the only tools not marked read-only, so a host that asks before write-capable tools, such as Hermes,
+asks before either one runs.
+
 ## Data handling
 
-Wallet addresses supplied in prompts or tool calls are public blockchain identifiers. The service may
-process wallet addresses, MCP session identifiers, client/user-agent metadata, tool usage, and an
-optional tool-call rationale for reliability and product analytics. Do not include private keys,
-seed phrases, access tokens, or other secrets in prompts or tool arguments.
+Every tool call goes to `mcp.aave.com`, which records tool usage for reliability and product
+analytics: the tool called and its outcome, the MCP session identifier, and the client name and
+user agent. A wallet address in a tool call is recorded only as a keyed hash, and addresses are
+removed from everything else that is recorded. Wallet addresses are public blockchain identifiers.
+Do not include private keys, seed phrases, access tokens, or other secrets in prompts or tool
+arguments.
 
 - [Privacy policy](https://aave.com/privacy-policy)
 - [Terms of service](https://aave.com/terms-of-service)
