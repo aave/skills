@@ -22,11 +22,21 @@ machine-readable result and `--keep-temp` to keep each run's `trace.jsonl`.
 
 | Case | Asks | Graders | Would catch |
 |---|---|---|---|
-| `yield-apy-history` | Which USDC supply APY is better on Ethereum, V3 or V4, and is today's rate typical for the past month | `tool_used get_apy_history` ≥ 1, plus an LLM rubric requiring the recent range beside the spot rate | ranking on one `get_markets` call, quoting a spot rate with no range |
-| `no-fire-protocol-question` | What is Aave, for someone new to DeFi | `tool_used prepare_action` = 0, plus an LLM rubric | a lending flow turning a conceptual question into a transaction build |
+| `supply-reads-position` | Supply 0.1 ETH to V4 on Ethereum and hand over the transaction | `preview_action` ≥ 1, `get_user_summary` ≥ 1, plus an LLM rubric for an unsigned hand-off that states the collateral consequence | building a supply without reading the position, or without simulating it |
+| `deleverage-compares-routes` | Reduce liquidation risk on a wallet carrying debt | `preview_action` ≥ 1, `prepare_action` = 0, plus an LLM rubric for a health factor per route, simulated or labelled as derived | estimating the resulting health factor, or recommending a route with no simulated value |
+| `account-activity-states-scope` | Recent V3 history for a wallet | `get_user_activity` ≥ 1, plus an LLM rubric for a stated scope | presenting one market's page as the wallet's whole history |
+| `tx-confirmation-reads-position` | Did this cbBTC supply go through | `get_user_activity` ≥ 1, `get_user_summary` ≥ 1, plus an LLM rubric confirming from the position | confirming from the hash alone, or answering with a block-explorer link |
+| `yield-apy-history` | Which USDC supply APY is better on Ethereum, V3 or V4, and is today's rate typical for the month | `get_apy_history` ≥ 1, plus an LLM rubric for the recent range beside the spot rate | ranking on one `get_markets` call, quoting a spot rate with no range |
+| `no-fire-protocol-question` | What is Aave, for someone new to DeFi | `prepare_action` = 0, plus an LLM rubric for a plain-language answer | a lending flow turning a conceptual question into a transaction build |
 
-Both cases remove the file tools, the shell and `Agent`, so an arm can answer only through the MCP
+Every case removes the file tools, the shell and `Agent`, so an arm can answer only through the MCP
 server. That is what makes the two arms comparable.
+
+The two wallet addresses in the prompts are public onchain accounts taken from
+`get_reserve_holders` on the V4 USDC reserve, so each case runs against a live position instead of an
+empty wallet where every answer is trivially correct. The transaction hash is a real V4 cbBTC supply
+from one of them. Replace the address when a position closes; the cases only assume the wallet holds
+something.
 
 ## Reading the result
 
